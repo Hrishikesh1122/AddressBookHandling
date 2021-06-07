@@ -18,7 +18,6 @@ public class AddressBook {
 	 * This method adds object person and its fields to ArrayList
 	 */
 	private void add() {
-		 System.out.println(personList);
 		 Person person = new Person();
 		 System.out.println("First Name :");
 		 person.setFirstName(sc.next());
@@ -37,10 +36,65 @@ public class AddressBook {
 		 System.out.println("Email :");
 		 person.setEmail(sc.next());
 		 
-		 personList.add(person);
-		 
-		 
+		 personList.add(person);		 
 	 }
+	/**
+	 * This method finds person according to first name and change its field according to user input
+	 */
+	private void edit() {
+		String enteredName;
+		System.out.println("Enter First name of contact to edit it ");
+		enteredName=sc.next();
+		for(int i=0;i<personList.size();i++)
+		{
+			if(personList.get(i).getFirstName().equals(enteredName))
+			{
+				int check=0;
+				System.out.println("Person found , what do you want to edit ?");
+				System.out.println("Enter\n1.First Name\n2.Last Name\n3.Address\n4.city\n5.State\n6.Zip\n7.Phone\n8.Email");
+				check=sc.nextInt();
+				switch(check) {
+				case 1:
+					System.out.println("Enter new first name");
+					personList.get(i).setFirstName(sc.next());
+					break;
+				case 2:
+					System.out.println("Enter new last name");
+					personList.get(i).setLastName(sc.next());
+					break;
+				case 3:
+					System.out.println("Enter new Address");
+					personList.get(i).setAddress(sc.next());
+					break;
+				case 4:
+					System.out.println("Enter new city");
+					personList.get(i).setCity(sc.next());
+					break;
+				case 5:
+					System.out.println("Enter new state");
+					personList.get(i).setState(sc.next());
+					break;
+				case 6:
+					System.out.println("Enter new zip");
+					personList.get(i).setZip(sc.nextInt());
+					break;
+				case 7:
+					System.out.println("Enter new phone number");
+					personList.get(i).setPhone(sc.nextLong());
+					break;
+				case 8:
+					System.out.println("Enter new email");
+					personList.get(i).setEmail(sc.next());
+					break;
+				default :
+					System.out.println("Invalid Entry");
+						
+				}
+			}
+		}
+		
+		
+	}
 	 
 	 public static void main(String[] args) {
 		System.out.println("Welcome to Address Book Handling");
@@ -53,6 +107,8 @@ public class AddressBook {
 			case 1: 
 				book.add();
 				break;
+			case 2:
+				book.edit();
 			default :
 				System.out.println("Invalid input");
 			}
