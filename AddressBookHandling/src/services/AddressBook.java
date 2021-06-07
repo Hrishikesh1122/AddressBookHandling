@@ -15,6 +15,7 @@ public class AddressBook {
 	 List<Person> personList = new ArrayList<>();
 	 
 	 /**
+	  * UC2
 	 * This method adds object person and its fields to ArrayList
 	 */
 	private void add() {
@@ -39,6 +40,7 @@ public class AddressBook {
 		 personList.add(person);		 
 	 }
 	/**
+	 * UC3
 	 * This method finds person according to first name and change its field according to user input
 	 */
 	private void edit() {
@@ -95,13 +97,28 @@ public class AddressBook {
 		
 		
 	}
+	
+	/**
+	 * UC4
+	 * This method removes person from list according to first name.
+	 */
+	private void delete() {
+		System.out.println("Enter First name of contact to delete it ");
+		String enteredName=sc.next();
+		for(int i=0;i<personList.size();i++)
+		{
+			if(personList.get(i).getFirstName().equals(enteredName))
+				personList.remove(i);
+		}
+		System.out.println("Person removed from Address book");
+	}
 	 
 	 public static void main(String[] args) {
 		System.out.println("Welcome to Address Book Handling");
 		AddressBook book = new AddressBook();
 		boolean isExit = false;
 		while (!isExit) {
-			System.out.println("Enter options\n1.Add\n2.Edit\n3.Delete\n4.Show\n5.Exit Contact");
+			System.out.println("Enter options\n1.Add\n2.Edit\n3.Delete\n4.Exit");
 			int userInput = sc.nextInt();
 			switch (userInput) {
 			case 1: 
@@ -109,6 +126,13 @@ public class AddressBook {
 				break;
 			case 2:
 				book.edit();
+				break;
+			case 3:
+				book.delete();
+				break;
+			case 4 :
+				isExit=true;
+				break;
 			default :
 				System.out.println("Invalid input");
 			}
