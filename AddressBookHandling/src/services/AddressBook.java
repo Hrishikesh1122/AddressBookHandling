@@ -2,17 +2,20 @@
  * Purpose : Address Book Handling
  * @author Hrishikesh Ugavekar
  * @version 1.0
- * @since 07-06-2021
+ * @since 08-06-2021
  *
  *************************************************/
+
 package services;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+
 import model.Person;
 public class AddressBook {
 	 private static Scanner sc = new Scanner(System.in);
-	 List<Person> personList = new ArrayList<>();
+	 Map<String,Person>hashmap=new HashMap<>();
 	 
 	 /**
 	  * UC2
@@ -31,25 +34,28 @@ public class AddressBook {
 		 System.out.println("State :");
 		 person.setState(sc.next());
 		 System.out.println("Zip :");
-		 person.setZip(sc.nextInt());
+		 person.setZip(sc.next());
 		 System.out.println("Phone :");
-		 person.setPhone(sc.nextLong());
+		 person.setPhone(sc.next());
 		 System.out.println("Email :");
 		 person.setEmail(sc.next());
 		 
-		 personList.add(person);		 
+		 hashmap.put(person.getFirstName(), person);
+		 System.out.println(hashmap);
 	 }
 	/**
 	 * UC3
 	 * This method finds person according to first name and change its field according to user input
 	 */
 	private void edit() {
+		 Person person = new Person();
 		String enteredName;
 		System.out.println("Enter First name of contact to edit it ");
 		enteredName=sc.next();
-		for(int i=0;i<personList.size();i++)
+		Set<String>Keys=hashmap.keySet();
+		for(String i:Keys)
 		{
-			if(personList.get(i).getFirstName().equals(enteredName))
+			if(i.equals(enteredName))
 			{
 				int check=0;
 				System.out.println("Person found , what do you want to edit ?");
@@ -58,41 +64,42 @@ public class AddressBook {
 				switch(check) {
 				case 1:
 					System.out.println("Enter new first name");
-					personList.get(i).setFirstName(sc.next());
+					person.setFirstName(sc.next());
 					break;
 				case 2:
 					System.out.println("Enter new last name");
-					personList.get(i).setLastName(sc.next());
+					person.setLastName(sc.next());
 					break;
 				case 3:
 					System.out.println("Enter new Address");
-					personList.get(i).setAddress(sc.next());
+					person.setAddress(sc.nextLine());
 					break;
 				case 4:
 					System.out.println("Enter new city");
-					personList.get(i).setCity(sc.next());
+					person.setCity(sc.next());
 					break;
 				case 5:
 					System.out.println("Enter new state");
-					personList.get(i).setState(sc.next());
+					person.setState(sc.next());
 					break;
 				case 6:
 					System.out.println("Enter new zip");
-					personList.get(i).setZip(sc.nextInt());
+					person.setZip(sc.next());
 					break;
 				case 7:
 					System.out.println("Enter new phone number");
-					personList.get(i).setPhone(sc.nextLong());
+					person.setPhone(sc.next());
 					break;
 				case 8:
 					System.out.println("Enter new email");
-					personList.get(i).setEmail(sc.next());
+					person.setEmail(sc.next());
 					break;
 				default :
 					System.out.println("Invalid Entry");
 						
 				}
 			}
+			hashmap.put(enteredName, person);
 		}
 		
 		
@@ -105,12 +112,22 @@ public class AddressBook {
 	private void delete() {
 		System.out.println("Enter First name of contact to delete it ");
 		String enteredName=sc.next();
-		for(int i=0;i<personList.size();i++)
+		Set<String>Keys=hashmap.keySet();
+		for(String i:Keys)
 		{
-			if(personList.get(i).getFirstName().equals(enteredName))
-				personList.remove(i);
+			if(i.equals(enteredName))
+			{
+				hashmap.remove(i);
+			    System.out.println("Person removed from Address book");
+			}
+			else
+				System.out.println("Person not found");
 		}
-		System.out.println("Person removed from Address book");
+		
+	}
+	private void show() {
+		System.out.println(hashmap);
+		
 	}
 	 
 	 public static void main(String[] args) {
@@ -118,8 +135,8 @@ public class AddressBook {
 		AddressBook book = new AddressBook();
 		boolean isExit = false;
 		while (!isExit) {
-			System.out.println("Enter options\n1.Add\n2.Edit\n3.Delete\n4.Exit");
-			int userInput = sc.nextInt();
+			System.out.println("Enter options\n1.Add\n2.Edit\n3.Delete\n4.Show\n5.Exit");
+			int userInput =sc.nextInt();
 			switch (userInput) {
 			case 1: 
 				book.add();
@@ -130,7 +147,10 @@ public class AddressBook {
 			case 3:
 				book.delete();
 				break;
-			case 4 :
+			case 4:
+				book.show();
+				break;
+			case 5 :
 				isExit=true;
 				break;
 			default :

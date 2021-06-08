@@ -1,8 +1,8 @@
 /**
  * Purpose : A POJO to set and get fields of Person
  * @author Hrishikesh Ugavekar
- * @Version 1.0
- * @since 07-06-2021
+ * @Version 1.1
+ * @since 08-06-2021
  *
  */
 package model;
@@ -12,8 +12,8 @@ public class Person {
 	private String address;
 	private String city;
 	private String state;
-	private int zip;
-	private long phone;
+	private String zip;
+	private String phone;
 	private String email;
 	public String getFirstName() {
 		return firstName;
@@ -50,16 +50,16 @@ public class Person {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	public long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getEmail() {
