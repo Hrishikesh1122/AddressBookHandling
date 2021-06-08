@@ -18,6 +18,11 @@ public class Person {
 	public String getFirstName() {
 		return firstName;
 	}
+	@Override
+	public String toString() {
+		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", zip=" + zip + ", phone=" + phone + ", email=" + email + "]";
+	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
